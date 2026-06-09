@@ -1,0 +1,6 @@
+{
+  "name": "Gaitano Ezra Portfolio",
+  "description": "Interactive 3D and Graphic Design Portfolio for Gaitano Ezra, Digital Creator based in Kampala, Uganda.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
