@@ -15,12 +15,12 @@ export default function FeaturedShowcase({ setActiveProject, handleViewChange }:
   const editorialProject = PROJECTS.find((p) => p.id === "mag-physical") || PROJECTS[3];
 
   return (
-    <section id="featured-showcase" className="py-24 px-6 bg-[#030303] border-b border-border-card/85 text-left relative overflow-hidden">
+    <section id="featured-showcase" className="py-24 px-6 bg-black border-b border-border-card/85 text-left relative overflow-hidden">
       {/* Background visual indicators */}
       <div className="absolute top-1/2 left-0 w-[350px] h-[350px] bg-orange-brand/5 rounded-full blur-[100px] -z-10 pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-[200px] h-[200px] bg-rose-500/5 rounded-full blur-[90px] -z-10 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         {/* Section Header */}
         <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div>

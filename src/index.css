@@ -1,14 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap');
 @import "tailwindcss";
 
+:root {
+  --orange-brand: #E85C1A;
+  --dark-bg: #0A0A0A;
+  --card-bg: #111111;
+  --border-card: #1E1E1E;
+}
+
+:root.light {
+  --dark-bg: #F8F9FA;
+  --card-bg: #FFFFFF;
+  --border-card: #E5E7EB;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: "Syne", sans-serif;
   
-  --color-orange-brand: #E85C1A;
-  --color-dark-bg: #0A0A0A;
-  --color-card-bg: #111111;
-  --color-border-card: #1E1E1E;
+  --color-orange-brand: var(--orange-brand);
+  --color-dark-bg: var(--dark-bg);
+  --color-card-bg: var(--card-bg);
+  --color-border-card: var(--border-card);
+}
+
+/* ── Light Mode Overrides ── */
+:root.light .text-white { color: #111827 !important; }
+:root.light .text-gray-200 { color: #1F2937 !important; }
+:root.light .text-gray-300 { color: #374151 !important; }
+:root.light .text-gray-350 { color: #4B5563 !important; }
+:root.light .text-gray-400 { color: #4B5563 !important; }
+:root.light .text-gray-500 { color: #6B7280 !important; }
+:root.light .text-gray-650 { color: #6B7280 !important; }
+:root.light .text-zinc-500 { color: #6B7280 !important; }
+
+:root.light .bg-black { background-color: #F1F3F5 !important; }
+:root.light .bg-zinc-950 { background-color: #E9ECEF !important; }
+:root.light .bg-zinc-900 { background-color: #E9ECEF !important; }
+:root.light .bg-neutral-800 { background-color: #E5E7EB !important; }
+
+:root.light .border-white { border-color: #111827 !important; }
+
+:root.light ::selection {
+  background-color: var(--orange-brand);
+  color: #ffffff !important;
+}
+
+:root.light .bg-black\/30 { background-color: rgb(0 0 0 / 0.05) !important; }
+:root.light .bg-black\/40 { background-color: rgb(0 0 0 / 0.06) !important; }
+:root.light .bg-black\/70 { background-color: rgb(0 0 0 / 0.1) !important; }
+:root.light .bg-black\/75 { background-color: rgb(0 0 0 / 0.12) !important; }
+:root.light .bg-dark-bg\/60 { background-color: rgb(248 249 250 / 0.6) !important; }
+:root.light .bg-dark-bg\/80 { background-color: rgb(248 249 250 / 0.8) !important; }
+:root.light .bg-dark-bg\/85 { background-color: rgb(248 249 250 / 0.85) !important; }
+
+/* Opacity-modified zinc backgrounds */
+:root.light .bg-zinc-950\/80 { background-color: color-mix(in oklab, #E9ECEF 80%, transparent) !important; }
+
+/* Opacity-modified black backgrounds */
+:root.light .bg-black\/85 { background-color: rgb(255 255 255 / 0.85) !important; }
+
+/* Gradient stops */
+:root.light .from-black { --tw-gradient-from: #F1F3F5 !important; --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position)) !important; }
+:root.light .to-black { --tw-gradient-to: #F1F3F5 !important; --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position)) !important; }
+:root.light .via-black\/30 { --tw-gradient-via: color-mix(in oklab, #F1F3F5 30%, transparent) !important; }
+
+/* Keep white text on orange backgrounds in light mode */
+:root.light .bg-orange-brand,
+:root.light .hover\:bg-orange-brand:hover,
+:root.light .bg-orange-brand\/90,
+:root.light .hover\:bg-orange-brand\/90:hover,
+:root.light .bg-orange-brand\/95,
+:root.light .hover\:bg-orange-brand\/95:hover {
+  color: #ffffff !important;
+}
+
+/* Invert hero logo for visibility in light mode */
+:root.light #hero-sec img[src*="logo"] {
+  filter: invert(1);
 }
 
 /* Custom smooth scrollbar */
@@ -23,5 +92,15 @@
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
+  background: #E85C1A;
+}
+
+:root.light ::-webkit-scrollbar-track {
+  background: #F8F9FA;
+}
+:root.light ::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+}
+:root.light ::-webkit-scrollbar-thumb:hover {
   background: #E85C1A;
 }

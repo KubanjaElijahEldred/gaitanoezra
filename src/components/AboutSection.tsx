@@ -10,7 +10,7 @@ export default function AboutSection({ handleViewChange }: AboutSectionProps) {
   return (
     <div className="w-full">
       {/* ── BIO / ABOUT SECTION ── */}
-      <section id="about" className="py-24 px-6 border-b border-border-card max-w-7xl mx-auto">
+      <section id="about" className="py-24 px-6 border-b border-border-card w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           <div className="lg:col-span-5">
@@ -64,7 +64,7 @@ export default function AboutSection({ handleViewChange }: AboutSectionProps) {
 
       {/* ── CLIENT REVIEWS / TESTIMONIALS ── */}
       <section id="testimonials" className="py-24 px-6 bg-black border-b border-border-card">
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full">
           
           <div className="mb-12">
             <span className="text-orange-brand text-[10px] font-mono uppercase tracking-[0.3em] block mb-3">

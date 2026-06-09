@@ -68,7 +68,7 @@ export default function ServicesSection({ handleViewChange }: ServicesSectionPro
   return (
     <div className="w-full">
       {/* ── CORE SERVICES DETAILS (WHAT I DO) ── */}
-      <section id="services" className="py-24 px-6 border-b border-border-card max-w-7xl mx-auto">
+      <section id="services" className="py-24 px-6 border-b border-border-card w-full">
         
         <div className="mb-16 text-left">
           <span className="text-orange-brand text-[10px] font-mono uppercase tracking-[0.3em] block mb-3">
@@ -86,7 +86,7 @@ export default function ServicesSection({ handleViewChange }: ServicesSectionPro
           {SERVICES.map((serv) => (
             <div
               key={serv.id}
-              className="bg-card-bg p-6 flex flex-col justify-between group hover:bg-[#161616] transition-colors"
+              className="bg-card-bg p-6 flex flex-col justify-between group hover:bg-black transition-colors"
             >
               <div>
                 <span className="font-display font-extrabold text-[10px] text-gray-600 group-hover:text-orange-brand transition-colors block mb-4 font-mono">
@@ -123,7 +123,7 @@ export default function ServicesSection({ handleViewChange }: ServicesSectionPro
 
       {/* ── CONCEPT GENERATOR / DESIGN BREIFING ENGINE ── */}
       <section id="brief-gen" className="py-24 px-6 bg-black border-b border-border-card text-gray-200">
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             

@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { MapPin, Briefcase } from "lucide-react";
 import { PROFILE_IMAGE } from "../data";
+import logoImg from "../assets/images/logo.png";
 
 interface HeroSectionProps {
   handleViewChange: (view: "home" | "about" | "sandbox" | "portfolio" | "services" | "contact") => void;
@@ -14,9 +15,18 @@ export default function HeroSection({ handleViewChange }: HeroSectionProps) {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-brand/10 rounded-full blur-[130px] -z-10 pointer-events-none" />
       <div className="absolute top-1/3 right-[10%] w-[1px] h-[40%] bg-gradient-to-b from-transparent via-orange-brand/30 to-transparent pointer-events-none hidden lg:block" />
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
         
         <div className="lg:col-span-8 flex flex-col justify-end">
+          <motion.img
+            src={logoImg}
+            alt="Ezra Collective"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="h-28 sm:h-36 md:h-44 lg:h-52 w-auto object-contain mb-4 select-none self-start"
+          />
+
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

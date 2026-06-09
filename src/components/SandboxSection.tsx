@@ -49,7 +49,7 @@ export default function SandboxSection({ handleViewChange }: SandboxSectionProps
     <div className="w-full">
       {/* ── INTERACTIVE 3D DESIGN PLAYGROUND (SANDBOX) ── */}
       <section id="sandbox" className="py-24 px-6 bg-black border-b border-border-card">
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full">
           
           <div className="mb-12 text-center">
             <span className="text-orange-brand text-[10px] font-mono uppercase tracking-[0.3em] inline-block mb-3">

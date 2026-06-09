@@ -1,13 +1,13 @@
 import { Project, Service, ClientStory } from "./types";
 
-export const PROFILE_IMAGE = "/src/assets/images/gaitano_ezra_profile_1781023273890.png";
+export const PROFILE_IMAGE = "/assets/images/gaitano_ezra_profile_1781023273890.png";
 
 export const PROJECTS: Project[] = [
   {
     id: "hero-3d-cosmic",
     title: "Cosmic Flow Elements",
     category: "3D Design",
-    image: "/src/assets/images/hero_3d_render_1781023214369.png",
+    image: "/assets/images/hero_3d_render_1781023214369.png",
     description: "An exploratory study of fluid organic geometry in 3D, combining high-contrast chrome metallurgy and translucent materials.",
     longDescription: "A fully realized series of 3D organic structural elements that explore the fluidity of shapes under extreme cinematic studio setups. Designed to represent the collision of digital technology and dynamic motion, this project features high-gloss black chrome combined with deep volcanic orange emitters.",
     tags: ["Cinema 4D", "Octane Render", "Fluid Dynamics", "Abstract Art"],
@@ -23,7 +23,7 @@ export const PROJECTS: Project[] = [
     id: "branding-glass",
     title: "Monolithic Glass Identity",
     category: "Branding",
-    image: "/src/assets/images/branding_3d_mockup_1781023229075.png",
+    image: "/assets/images/branding_3d_mockup_1781023229075.png",
     description: "Branding collateral and architectural brand identity mockup using photorealistic translucent glass prisms and high-end tech stationery.",
     longDescription: "This premium brand visual showcase explores modern corporate identities through tactile glass elements. By combining premium matte-finished layouts, metallic accents, and high-fashion editorial grid designs, we created an active, living ecosystem for Next-Gen digital platforms.",
     tags: ["Brand Strategy", "KeyShot", "Tactile Mockups", "Material Shaders"],
@@ -39,7 +39,7 @@ export const PROJECTS: Project[] = [
     id: "typo-sculpt",
     title: "Typographic Metal Sculpture",
     category: "Motion Graphics",
-    image: "/src/assets/images/typography_3d_poster_1781023244187.png",
+    image: "/assets/images/typography_3d_poster_1781023244187.png",
     description: "Architectural typographic layout rendering, celebrating mechanical lettering styles and high-vibrancy physical material textures.",
     longDescription: "A conceptual typographical artwork focusing on structural lettering. By rendering words as towering architectural blocks in translucent materials and marble, this project raises the brand voice to an immersive, touchable structural landscape.",
     tags: ["3D Typography", "Product Visualization", "Subsurface Scattering", "Blender"],
@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     id: "mag-physical",
     title: "Sculptural Editorial Space",
     category: "Editorial Layout",
-    image: "/src/assets/images/editorial_3d_layout_1781023257899.png",
+    image: "/assets/images/editorial_3d_layout_1781023257899.png",
     description: "A gorgeous luxury print magazine mockup where theoretical layouts transition directly into physical 3D fluid structures.",
     longDescription: "Exploring the boundary between the physical and digital page, this experimental design pulls fluid, glossy objects straight out of high-end editorial layouts. Modern typography matches beautifully with organic volumetric meshes for a truly standard-shifting experience.",
     tags: ["InDesign Suite", "Houdini Simulations", "C4D Rendering", "Creative Direction"],

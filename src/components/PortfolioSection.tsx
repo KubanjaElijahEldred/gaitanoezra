@@ -22,7 +22,7 @@ export default function PortfolioSection({ handleViewChange, setActiveProject }:
   return (
     <div className="w-full">
       {/* ── PORTFOLIO PROJECTS SHOWCASE grid ── */}
-      <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto border-b border-border-card">
+      <section id="portfolio" className="py-24 px-6 w-full border-b border-border-card">
         
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
           <div className="text-left">
