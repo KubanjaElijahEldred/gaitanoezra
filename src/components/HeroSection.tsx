@@ -17,65 +17,69 @@ export default function HeroSection({ handleViewChange }: HeroSectionProps) {
 
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
         
-        <div className="lg:col-span-8 flex flex-col justify-end">
+        <div className="lg:col-span-8 flex flex-col justify-between">
+          {/* Logo — touches the navbar */}
           <motion.img
             src={logoImg}
             alt="Ezra Collective"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="h-28 sm:h-36 md:h-44 lg:h-52 w-auto object-contain mb-4 select-none self-start"
+            className="h-40 sm:h-52 md:h-64 lg:h-80 xl:h-96 w-auto object-contain select-none self-start"
           />
 
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex items-center gap-2 text-orange-brand font-mono text-xs uppercase tracking-[0.25em] mb-4"
-          >
-            <span className="w-2 h-2 rounded-full bg-orange-brand animate-pulse" />
-            Gaitano Ezra — 3D & Digital Designer
-          </motion.div>
-
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-5xl sm:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tight"
-          >
-            Pushing <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-brand to-rose-500">volumetric</span> <br />
-            boundaries.
-          </motion.h1>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-6 text-gray-400 text-lg max-w-[55ch] leading-relaxed font-sans"
-          >
-            At Koko Digital Studio in Kampala, Uganda, I merge layout principles, high-vibrancy strategy, and interactive 3D simulations. Turning pixels into experiences that capture loyalty.
-          </motion.p>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-wrap gap-4 mt-8"
-          >
-            <button 
-              onClick={() => handleViewChange("portfolio")} 
-              className="px-6 py-3.5 bg-orange-brand hover:bg-orange-brand/95 text-white font-display font-extrabold text-xs tracking-widest uppercase transition-transform hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+          {/* Text block — stays at the bottom */}
+          <div>
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex items-center gap-2 text-orange-brand font-mono text-xs uppercase tracking-[0.25em] mb-4"
             >
-              Explore Work
-            </button>
-            <button 
-              onClick={() => handleViewChange("sandbox")} 
-              className="px-6 py-3.5 border border-border-card hover:border-orange-brand/50 text-gray-300 hover:text-white font-display font-extrabold text-xs tracking-widest uppercase transition-all cursor-pointer"
+              <span className="w-2 h-2 rounded-full bg-orange-brand animate-pulse" />
+              Gaitano Ezra — 3D & Digital Designer
+            </motion.div>
+
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="font-display text-5xl sm:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tight"
             >
-              Try 3D Sandbox
-            </button>
-          </motion.div>
+              Pushing <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-brand to-rose-500">volumetric</span> <br />
+              boundaries.
+            </motion.h1>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mt-6 text-gray-400 text-lg max-w-[55ch] leading-relaxed font-sans"
+            >
+              At Koko Digital Studio in Kampala, Uganda, I merge layout principles, high-vibrancy strategy, and interactive 3D simulations. Turning pixels into experiences that capture loyalty.
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex flex-wrap gap-4 mt-8"
+            >
+              <button 
+                onClick={() => handleViewChange("portfolio")} 
+                className="px-6 py-3.5 bg-orange-brand hover:bg-orange-brand/95 text-white font-display font-extrabold text-xs tracking-widest uppercase transition-transform hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+              >
+                Explore Work
+              </button>
+              <button 
+                onClick={() => handleViewChange("sandbox")} 
+                className="px-6 py-3.5 border border-border-card hover:border-orange-brand/50 text-gray-300 hover:text-white font-display font-extrabold text-xs tracking-widest uppercase transition-all cursor-pointer"
+              >
+                Try 3D Sandbox
+              </button>
+            </motion.div>
+          </div>
         </div>
 
         {/* Profile & Location Card */}
