@@ -29,12 +29,12 @@ export default function SplashScreen() {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
-      className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center"
+      className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center"
     >
       <motion.img
         src={logoImg}
         alt="Ezra Collective"
-        className="w-48 sm:w-64 lg:w-80 h-auto object-contain"
+        className="w-48 sm:w-64 lg:w-80 h-auto object-contain invert"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
