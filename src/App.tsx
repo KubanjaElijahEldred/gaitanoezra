@@ -227,8 +227,8 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(0deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px]" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-orange-brand/15 to-transparent pointer-events-none" />
 
-        <div className="relative grid w-full gap-10 lg:grid-cols-[1fr_460px] xl:grid-cols-[1fr_520px] lg:items-stretch">
-          <div className="order-2 flex flex-col border border-border-card bg-dark-bg/80 p-5 sm:p-8 lg:order-1 lg:p-10">
+        <div className="relative grid w-full gap-10 [grid-template-areas:'profile'_'intro'_'brands'] lg:grid-cols-[1fr_460px] xl:grid-cols-[1fr_520px] lg:[grid-template-areas:'intro_profile'_'intro_brands'] lg:items-stretch">
+          <div className="[grid-area:intro] flex flex-col border border-border-card bg-dark-bg/80 p-5 sm:p-8 lg:p-10">
             <div>
               <EzraCollectiveLogo className="mb-6 h-20 w-auto sm:h-28 lg:h-32" />
               <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
@@ -291,8 +291,7 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
             </div>
           </div>
 
-          <aside className="order-1 grid gap-5 lg:order-2 lg:grid-rows-[1fr_auto]">
-            <div className="relative min-h-[520px] overflow-hidden border border-border-card bg-card-bg">
+          <div className="[grid-area:profile] relative min-h-[520px] overflow-hidden border border-border-card bg-card-bg">
               <img
                 src={PROFILE_IMAGE}
                 alt="Gaitano Ezra"
@@ -306,7 +305,7 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
               </div>
             </div>
 
-            <div className="border border-border-card bg-card-bg p-5">
+            <div className="[grid-area:brands] border border-border-card bg-card-bg p-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-orange-brand">
                 Brands I have worked with
               </p>
@@ -338,7 +337,6 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
                 ))}
               </div>
             </div>
-          </aside>
         </div>
       </section>
 
