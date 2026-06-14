@@ -48,6 +48,8 @@
 
 :root.light .bg-black\/30 { background-color: rgb(0 0 0 / 0.05) !important; }
 :root.light .bg-black\/40 { background-color: rgb(0 0 0 / 0.06) !important; }
+:root.light .bg-black\/55 { background-color: rgb(255 255 255 / 0.65) !important; }
+:root.light .bg-black\/65 { background-color: rgb(255 255 255 / 0.75) !important; }
 :root.light .bg-black\/70 { background-color: rgb(0 0 0 / 0.1) !important; }
 :root.light .bg-black\/75 { background-color: rgb(0 0 0 / 0.12) !important; }
 :root.light .bg-dark-bg\/60 { background-color: rgb(248 249 250 / 0.6) !important; }
@@ -68,10 +70,13 @@
 /* Keep white text on orange backgrounds in light mode */
 :root.light .bg-orange-brand,
 :root.light .hover\:bg-orange-brand:hover,
+:root.light .group-hover\:bg-orange-brand:hover,
 :root.light .bg-orange-brand\/90,
 :root.light .hover\:bg-orange-brand\/90:hover,
+:root.light .group-hover\:bg-orange-brand\/90:hover,
 :root.light .bg-orange-brand\/95,
-:root.light .hover\:bg-orange-brand\/95:hover {
+:root.light .hover\:bg-orange-brand\/95:hover,
+:root.light .group-hover\:bg-orange-brand\/95:hover {
   color: #ffffff !important;
 }
 

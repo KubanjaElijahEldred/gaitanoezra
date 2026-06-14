@@ -146,7 +146,7 @@ export const ALL_BRANDS = [
   "Bespoke Cakes UG",
   "Vulkan Sports Arena",
   "Garuga Resort Beach Hotel",
-  "Event Firm UG"
+  "Venstela"
 ];
 
 export const WORKED_WITH = [
@@ -154,7 +154,7 @@ export const WORKED_WITH = [
     name: "Drinks24 UG",
     type: "Beverage delivery",
     url: "https://www.instagram.com/drinks_24_ug?igsh=MWx0bjdwb3pjYm40ZQ%3D%3D&utm_source=qr",
-    image: "/assets/images/workplace-drinks24.jpeg",
+    image: "/assets/images/drinks24.png",
     meaning: "For Drinks24 UG, the work is about making drinks easy to discover, easy to order, and easy to remember. The content direction focuses on product visibility, fast-moving offers, captions that sell, and social posts that push customers toward WhatsApp orders."
   },
   {
@@ -168,21 +168,21 @@ export const WORKED_WITH = [
     name: "Vulkan Sports Arena",
     type: "Sports & entertainment",
     url: "https://www.instagram.com/vulkan_sportsarena?igsh=cDlydzZ4aWk5MXFr&utm_source=qr",
-    image: "/assets/images/workplace-vulkan.jpeg",
+    image: "/assets/images/vulkan.png",
     meaning: "For Vulkan Sports Arena, the goal is to show energy, movement, and the reason people should visit. The work relates to event coverage, short-form video, match-day hype, social management, and content that makes the venue feel active."
   },
   {
     name: "Garuga Resort Beach Hotel",
     type: "Resort & hospitality",
     url: "https://www.instagram.com/garuga_resort_beach_hotel?igsh=cWxudHdld21zcW90",
-    image: "/assets/images/workplace-garuga.jpeg",
+    image: "/assets/images/garuga-resort.png",
     meaning: "For Garuga Resort Beach Hotel, the content is about selling the feeling of escape. The work highlights the beach, rooms, food, experiences, and guest moments in a way that supports bookings and weekend plans."
   },
   {
-    name: "Event Firm UG",
+    name: "Venstela",
     type: "Events & production",
     url: "https://www.instagram.com/event_firm_ug?igsh=amUyaTZtaTg5Mmhj",
-    image: "/assets/images/editorial_3d_layout_1781023257899.png",
-    meaning: "For Event Firm UG, the work is about turning events into proof of quality. The content direction supports event recaps, behind-the-scenes moments, service promotion, and social storytelling that helps clients trust the team."
+    image: "/assets/images/venstela.png",
+    meaning: "For Venstela, the work is about turning events into proof of quality. The content direction supports event recaps, behind-the-scenes moments, service promotion, and social storytelling that helps clients trust the team."
   }
 ];
