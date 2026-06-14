@@ -12,7 +12,7 @@ import {
   Sun,
   X,
 } from "lucide-react";
-import { PROFILE_IMAGE, SERVICES, WORKED_WITH } from "./data";
+import { ALL_BRAND_LINKS, PROFILE_IMAGE, SERVICES, WORKED_WITH } from "./data";
 import { useTheme } from "./components/ThemeProvider";
 import SplashScreen from "./components/SplashScreen";
 import logoImg from "./assets/images/logo.png";
@@ -217,6 +217,8 @@ export default function App() {
 }
 
 function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
+  const [showAllBrands, setShowAllBrands] = useState(false);
+
   return (
     <div>
       <section className="relative overflow-hidden border-b border-border-card bg-black px-5 py-8 sm:py-10 lg:px-10">
@@ -400,6 +402,38 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
                 </div>
               </a>
             ))}
+          </div>
+
+          <div className="mt-10 border-t border-border-card pt-8">
+            <button
+              onClick={() => setShowAllBrands((v) => !v)}
+              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-400 hover:text-orange-brand transition-colors cursor-pointer"
+            >
+              {showAllBrands ? "Show less" : "See more brands"}
+              <ArrowUpRight className={`h-4 w-4 transition-transform ${showAllBrands ? "rotate-180" : ""}`} />
+            </button>
+
+            {showAllBrands && (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 12 }}
+                transition={{ duration: 0.2 }}
+                className="mt-6 flex flex-wrap gap-3"
+              >
+                {ALL_BRAND_LINKS.map((brand) => (
+                  <a
+                    key={brand.name}
+                    href={brand.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-border-card bg-card-bg px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-gray-400 transition-colors hover:border-orange-brand hover:text-orange-brand"
+                  >
+                    {brand.name}
+                  </a>
+                ))}
+              </motion.div>
+            )}
           </div>
         </div>
       </section>

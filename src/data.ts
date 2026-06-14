@@ -141,12 +141,20 @@ export const CLIENT_STORIES: ClientStory[] = [
   }
 ];
 
-export const ALL_BRANDS = [
-  "Drinks24 UG",
-  "Bespoke Cakes UG",
-  "Vulkan Sports Arena",
-  "Garuga Resort Beach Hotel",
-  "Venstela"
+export const ALL_BRAND_LINKS = [
+  { name: "Drinks24 UG", url: "https://www.instagram.com/drinks_24_ug?igsh=MWx0bjdwb3pjYm40ZQ%3D%3D&utm_source=qr" },
+  { name: "Bespoke Cakes UG", url: "https://www.instagram.com/bespokecakesug?TY0aXphN3JsMHAwcg%3D%3D&utm_source=qr" },
+  { name: "Vulkan Sports Arena", url: "https://www.instagram.com/vulkan_sportsarena?igsh=cDlydzZ4aWk5MXFr&utm_source=qr" },
+  { name: "Garuga Resort Beach Hotel", url: "https://www.instagram.com/garuga_resort_beach_hotel?igsh=cWxudHdld21zcW90" },
+  { name: "Venstela", url: "https://www.instagram.com/event_firm_ug?igsh=amUyaTZtaTg5Mmhj" },
+  { name: "Meat N Bunz", url: "#" },
+  { name: "Krustys", url: "#" },
+  { name: "Grid Club Kampala", url: "#" },
+  { name: "Calm Suites Kampala", url: "#" },
+  { name: "Lake George View Golf Resort", url: "#" },
+  { name: "Lodge Bella Vista", url: "#" },
+  { name: "Forest Resort Beach Kasenge", url: "#" },
+  { name: "Karuma Tours & Travel", url: "#" },
 ];
 
 export const WORKED_WITH = [
@@ -161,7 +169,7 @@ export const WORKED_WITH = [
     name: "Bespoke Cakes UG",
     type: "Bakery & custom cakes",
     url: "https://www.instagram.com/bespokecakesug?TY0aXphN3JsMHAwcg%3D%3D&utm_source=qr",
-    image: "/assets/images/workplace-bespoke-cakes.jpeg",
+    image: "/assets/images/bespoke-cakes.png",
     meaning: "For Bespoke Cakes UG, the content needs to make every cake feel personal, premium, and worth ordering. The work connects product storytelling, celebration moments, sweet captions, and clear order messaging for birthdays, gifts, and special events."
   },
   {
