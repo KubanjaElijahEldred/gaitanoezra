@@ -90,29 +90,6 @@ const contactLinks = [
   },
 ];
 
-const homePitchBlocks = [
-  {
-    title: "I turn brand pages into sales channels.",
-    eyebrow: "Content strategy",
-    copy: "Every post needs a job. I plan content around offers, audience behavior, campaign timing, and the exact action a customer should take next."
-  },
-  {
-    title: "I make short-form video feel clear, clean, and worth watching.",
-    eyebrow: "Video editing",
-    copy: "From raw clips to polished Reels, I shape pacing, captions, hooks, transitions, color, and sound so the content holds attention and feels ready for the market."
-  },
-  {
-    title: "I write words people can actually respond to.",
-    eyebrow: "Copy & scripts",
-    copy: "Captions, ad copy, WhatsApp messages, product descriptions, and scripts are written to sound natural, direct, and persuasive without making the brand feel forced."
-  },
-  {
-    title: "I manage consistency so the brand does not go quiet.",
-    eyebrow: "Social management",
-    copy: "I handle posting direction, page presentation, community engagement, campaign follow-through, and simple performance checks that keep the brand active."
-  }
-];
-
 export default function App() {
   const [page, setPage] = useState<Page>("profile");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -242,14 +219,18 @@ export default function App() {
 function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
   return (
     <div>
-      <section className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b border-border-card bg-black px-5 py-10 sm:py-14 lg:px-10">
+      <section className="relative overflow-hidden border-b border-border-card bg-black px-5 py-8 sm:py-10 lg:px-10">
+        <div
+          className="absolute inset-0 pointer-events-none bg-cover bg-center bg-no-repeat opacity-40"
+          style={{ backgroundImage: "url(/assets/images/hero-abstract-bg.png)" }}
+        />
         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(0deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px]" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-orange-brand/15 to-transparent pointer-events-none" />
 
-        <div className="relative grid min-h-[calc(100vh-160px)] w-full gap-10 lg:grid-cols-[1fr_460px] xl:grid-cols-[1fr_520px] lg:items-stretch">
-          <div className="flex flex-col justify-between border border-border-card bg-dark-bg/80 p-5 sm:p-8 lg:p-10">
+        <div className="relative grid w-full gap-10 lg:grid-cols-[1fr_460px] xl:grid-cols-[1fr_520px] lg:items-stretch">
+          <div className="flex flex-col border border-border-card bg-dark-bg/80 p-5 sm:p-8 lg:p-10">
             <div>
-              <EzraCollectiveLogo className="mb-10 h-20 w-auto sm:h-28 lg:h-36" />
+              <EzraCollectiveLogo className="mb-6 h-20 w-auto sm:h-28 lg:h-32" />
               <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
                 About
               </p>
@@ -259,7 +240,7 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
             </div>
 
             <div>
-              <div className="mt-10 grid max-w-2xl grid-cols-3 gap-4 border-y border-border-card py-6">
+              <div className="mt-8 grid max-w-2xl grid-cols-3 gap-4 border-y border-border-card py-6">
                 {[
                   ["5+", "Years creating"],
                   ["10+", "Brands served"],
@@ -283,12 +264,20 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
                     I am <strong className="text-white">Gaitano Ezra</strong>, a digital creator based in Kampala. I work at the intersection of content strategy, visual storytelling, and brand positioning.
                   </p>
                   <p>
-                    At <strong className="text-white">Koko Digital Studio</strong>, I lead creative direction, video production, and platform management for hospitality, lifestyle, sports, events, and beverage brands across Uganda.
+                    At <strong className="text-white">Koko Digital Studio</strong>, I am one of the creative directors, leading video production and platform management for hospitality, lifestyle, sports, events, and beverage brands across Uganda.
                   </p>
                 </div>
                 <p className="border-l border-orange-brand/60 pl-5 text-gray-300">
                   My work is simple: build a clear brand voice that turns attention into customers and customers into loyal communities.
                 </p>
+              </div>
+
+              <div className="mt-8 overflow-hidden border border-border-card">
+                <img
+                  src="/assets/images/hero-abstract-bg.png"
+                  alt="Abstract 3D background"
+                  className="h-56 w-full object-cover sm:h-72 lg:h-80"
+                />
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -328,20 +317,22 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
                     href={brand.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative min-h-32 overflow-hidden border border-border-card bg-black transition-colors hover:border-orange-brand/70"
+                    className="group grid overflow-hidden border border-border-card bg-black transition-colors hover:border-orange-brand/70"
                   >
-                    <img
-                      src={brand.image}
-                      alt={brand.name}
-                      className="absolute inset-0 h-full w-full object-cover opacity-55 transition duration-500 group-hover:scale-105 group-hover:opacity-80"
-                    />
-                    <span className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
-                    <span className="relative flex h-full min-h-32 flex-col justify-end p-4">
+                    <span className="block h-36 overflow-hidden bg-zinc-950">
+                      <img
+                        src={brand.image}
+                        alt={brand.name}
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    </span>
+                    <span className="block p-4">
                       <span className="mb-2 inline-flex w-fit items-center gap-1 border border-orange-brand/50 bg-black/55 px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-orange-brand backdrop-blur">
                         View page <ExternalLink className="h-3 w-3" />
                       </span>
                       <span className="block font-display text-xl font-black text-white">{brand.name}</span>
                       <span className="mt-1 block text-xs text-gray-300">{brand.type}</span>
+                      <span className="mt-3 line-clamp-2 block text-xs leading-5 text-gray-300">{brand.meaning}</span>
                     </span>
                   </a>
                 ))}
@@ -367,26 +358,25 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
             </button>
           </div>
 
-          <div className="mb-14 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {WORKED_WITH.map((brand, index) => (
               <a
                 key={brand.name}
                 href={brand.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative min-h-80 overflow-hidden border border-border-card bg-card-bg ${
+                className={`group overflow-hidden border border-border-card bg-card-bg ${
                   index === 0 ? "xl:col-span-2" : ""
                 }`}
               >
-                <img
-                  src={brand.image}
-                  alt={brand.name}
-                  className="absolute inset-0 h-full w-full object-cover opacity-65 transition duration-700 group-hover:scale-105 group-hover:opacity-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
-                <div className="absolute inset-0 border border-transparent transition-colors group-hover:border-orange-brand/80" />
-                <div className="relative flex h-full min-h-80 flex-col justify-between p-5">
-                  <div className="flex items-center justify-between">
+                <div className={`relative overflow-hidden bg-zinc-950 ${index === 0 ? "h-[520px]" : "h-80"}`}>
+                  <img
+                    src={brand.image}
+                    alt={brand.name}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                  <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
                     <span className="border border-white/15 bg-black/55 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-gray-200 backdrop-blur">
                       0{index + 1}
                     </span>
@@ -394,38 +384,23 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </div>
+                </div>
 
-                  <div>
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.28em] text-orange-brand">
-                      {brand.type}
-                    </p>
-                    <h3 className="font-display text-2xl font-black leading-tight text-white">
-                      {brand.name}
-                    </h3>
-                  </div>
+                <div className="p-5">
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.28em] text-orange-brand">
+                    {brand.type}
+                  </p>
+                  <h3 className="font-display text-2xl font-black leading-tight text-white">
+                    {brand.name}
+                  </h3>
+                  <p className="mt-4 text-sm leading-7 text-gray-300">
+                    {brand.meaning}
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-2 border border-orange-brand/50 bg-black/55 px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-orange-brand backdrop-blur transition-colors group-hover:bg-orange-brand group-hover:text-white">
+                    Open Instagram <ExternalLink className="h-3 w-3" />
+                  </span>
                 </div>
               </a>
-            ))}
-          </div>
-
-          <div className="grid border border-border-card bg-border-card md:grid-cols-2 xl:grid-cols-4">
-            {homePitchBlocks.map((item, index) => (
-              <article key={item.title} className="group bg-card-bg p-6 transition-colors hover:bg-[#151515]">
-                <div className="mb-10 flex items-center justify-between">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-orange-brand">
-                    {item.eyebrow}
-                  </span>
-                  <span className="font-display text-4xl font-black text-white/10 transition-colors group-hover:text-orange-brand">
-                    0{index + 1}
-                  </span>
-                </div>
-                <h3 className="font-display text-2xl font-black leading-tight text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-5 text-sm leading-7 text-gray-400">
-                  {item.copy}
-                </p>
-              </article>
             ))}
           </div>
         </div>
