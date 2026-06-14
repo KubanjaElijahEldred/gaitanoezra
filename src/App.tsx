@@ -1,381 +1,503 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, Menu, X, ExternalLink, Sun, Moon } from "lucide-react";
-import { ALL_BRANDS, PROJECTS } from "./data";
-import { Project } from "./types";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import {
+  ArrowUpRight,
+  ExternalLink,
+  Instagram,
+  Mail,
+  Menu,
+  MessageCircle,
+  Moon,
+  Phone,
+  Sun,
+  X,
+} from "lucide-react";
+import { PROFILE_IMAGE, SERVICES, WORKED_WITH } from "./data";
 import { useTheme } from "./components/ThemeProvider";
 import SplashScreen from "./components/SplashScreen";
 import logoImg from "./assets/images/logo.png";
 
-// Import modular pages/subcomponents
-import HeroSection from "./components/HeroSection";
-import FeaturedShowcase from "./components/FeaturedShowcase";
-import AboutSection from "./components/AboutSection";
-import SandboxSection from "./components/SandboxSection";
-import PortfolioSection from "./components/PortfolioSection";
-import ServicesSection from "./components/ServicesSection";
-import ContactSection from "./components/ContactSection";
+type Page = "profile" | "services";
 
-// Logo component using the uploaded logo.png
 export function EzraCollectiveLogo({ className = "h-10" }: { className?: string }) {
   return (
     <img
       src={logoImg}
       alt="Ezra Collective"
-      className={`object-contain select-none cursor-pointer ${className}`}
+      className={`object-contain select-none ${className}`}
     />
   );
 }
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full border border-border-card text-gray-400 hover:text-orange-brand hover:border-orange-brand/50 transition-all cursor-pointer focus:outline-none"
+      className="grid h-9 w-9 place-items-center border border-border-card text-gray-400 hover:border-orange-brand/50 hover:text-orange-brand transition-colors cursor-pointer"
       aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
     >
       <AnimatePresence mode="wait" initial={false}>
         {theme === "dark" ? (
-          <motion.div
+          <motion.span
             key="sun"
-            initial={{ opacity: 0, rotate: -90 }}
+            initial={{ opacity: 0, rotate: -45 }}
             animate={{ opacity: 1, rotate: 0 }}
-            exit={{ opacity: 0, rotate: 90 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, rotate: 45 }}
           >
-            <Sun className="w-4 h-4" />
-          </motion.div>
+            <Sun className="h-4 w-4" />
+          </motion.span>
         ) : (
-          <motion.div
+          <motion.span
             key="moon"
-            initial={{ opacity: 0, rotate: 90 }}
+            initial={{ opacity: 0, rotate: 45 }}
             animate={{ opacity: 1, rotate: 0 }}
-            exit={{ opacity: 0, rotate: -90 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, rotate: -45 }}
           >
-            <Moon className="w-4 h-4" />
-          </motion.div>
+            <Moon className="h-4 w-4" />
+          </motion.span>
         )}
       </AnimatePresence>
     </button>
   );
 }
 
+const contactLinks = [
+  {
+    label: "WhatsApp",
+    value: "+256 709 449308",
+    href: "https://wa.me/256709449308",
+    icon: MessageCircle,
+  },
+  {
+    label: "Email",
+    value: "geotanoezra01@gmail.com",
+    href: "mailto:geotanoezra01@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "Instagram",
+    value: "@geatano_ezra",
+    href: "https://www.instagram.com/geatano_ezra?igsh=MzhuNm9yYWRicHMz&utm_source=qr",
+    icon: Instagram,
+  },
+  {
+    label: "Call",
+    value: "+256 761 768 144",
+    href: "tel:+256761768144",
+    icon: Phone,
+  },
+];
+
+const homePitchBlocks = [
+  {
+    title: "I turn brand pages into sales channels.",
+    eyebrow: "Content strategy",
+    copy: "Every post needs a job. I plan content around offers, audience behavior, campaign timing, and the exact action a customer should take next."
+  },
+  {
+    title: "I make short-form video feel clear, clean, and worth watching.",
+    eyebrow: "Video editing",
+    copy: "From raw clips to polished Reels, I shape pacing, captions, hooks, transitions, color, and sound so the content holds attention and feels ready for the market."
+  },
+  {
+    title: "I write words people can actually respond to.",
+    eyebrow: "Copy & scripts",
+    copy: "Captions, ad copy, WhatsApp messages, product descriptions, and scripts are written to sound natural, direct, and persuasive without making the brand feel forced."
+  },
+  {
+    title: "I manage consistency so the brand does not go quiet.",
+    eyebrow: "Social management",
+    copy: "I handle posting direction, page presentation, community engagement, campaign follow-through, and simple performance checks that keep the brand active."
+  }
+];
+
 export default function App() {
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [page, setPage] = useState<Page>("profile");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeView, setActiveView] = useState<"home" | "about" | "sandbox" | "portfolio" | "services" | "contact">("home");
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 4000);
+    const timer = setTimeout(() => setShowSplash(false), 1800);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleViewChange = (view: "home" | "about" | "sandbox" | "portfolio" | "services" | "contact") => {
-    setActiveView(view);
+  const goToPage = (nextPage: Page) => {
+    setPage(nextPage);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <>
-      <AnimatePresence>
-        {showSplash && <SplashScreen />}
-      </AnimatePresence>
+      <AnimatePresence>{showSplash && <SplashScreen />}</AnimatePresence>
 
-      <div id="root-app" className="min-h-screen bg-dark-bg text-gray-200 selection:bg-orange-brand selection:text-white font-sans antialiased flex flex-col justify-between">
-        
-        {/* ── HIGH PORT NAVIGATION BAR ── */}
-        <nav id="nav-header" className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-orange-brand/30 transition-all shadow-[0_0_50px_rgba(232,92,26,0.15),inset_0_-20px_40px_rgba(232,92,26,0.08)]">
-          <div className="w-full px-6 h-20 flex justify-between items-center">
-            
-            <div onClick={() => handleViewChange("home")} className="flex items-center gap-3 cursor-pointer">
-              <EzraCollectiveLogo className="h-14 w-auto" />
-              <span className="hidden sm:inline-block px-2 py-0.5 text-[9px] bg-border-card text-gray-400 rounded-full font-mono tracking-wider">
-                STUDIO 3D
-              </span>
-            </div>
+      <div className="min-h-screen bg-dark-bg text-gray-200 selection:bg-orange-brand selection:text-white font-sans antialiased">
+        <nav className="fixed inset-x-0 top-0 z-50 border-b border-border-card bg-dark-bg/90 backdrop-blur-xl">
+          <div className="flex h-20 w-full items-center justify-between px-5 lg:px-10">
+            <button
+              onClick={() => goToPage("profile")}
+              className="flex items-center gap-3 cursor-pointer"
+              aria-label="Open profile page"
+            >
+              <EzraCollectiveLogo className="h-12 w-auto" />
+            </button>
 
-            <div className="hidden md:flex items-center gap-8">
-              <button 
-                onClick={() => handleViewChange("home")} 
-                className={`text-xs font-medium tracking-widest uppercase transition-colors cursor-pointer ${
-                  activeView === "home" ? "text-orange-brand" : "text-gray-400 hover:text-orange-brand"
-                }`}
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => handleViewChange("about")} 
-                className={`text-xs font-medium tracking-widest uppercase transition-colors cursor-pointer ${
-                  activeView === "about" ? "text-orange-brand" : "text-gray-400 hover:text-orange-brand"
-                }`}
-              >
-                About
-              </button>
-              <button 
-                onClick={() => handleViewChange("sandbox")} 
-                className={`text-xs font-medium tracking-widest uppercase transition-colors cursor-pointer ${
-                  activeView === "sandbox" ? "text-orange-brand" : "text-gray-400 hover:text-orange-brand"
-                }`}
-              >
-                3D Sandbox
-              </button>
-              <button 
-                onClick={() => handleViewChange("portfolio")} 
-                className={`text-xs font-medium tracking-widest uppercase transition-colors cursor-pointer ${
-                  activeView === "portfolio" ? "text-orange-brand" : "text-gray-400 hover:text-orange-brand"
-                }`}
-              >
-                Portfolio
-              </button>
-              <button 
-                onClick={() => handleViewChange("services")} 
-                className={`text-xs font-medium tracking-widest uppercase transition-colors cursor-pointer ${
-                  activeView === "services" ? "text-orange-brand" : "text-gray-400 hover:text-orange-brand"
-                }`}
-              >
-                Services
-              </button>
-              <button 
-                onClick={() => handleViewChange("contact")} 
-                className="px-4 py-2 bg-orange-brand hover:bg-orange-brand/90 text-white font-display font-bold text-xs tracking-widest uppercase transition-all hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
+            <div className="hidden items-center gap-3 md:flex">
+              {[
+                ["profile", "Profile"],
+                ["services", "Services"],
+              ].map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => goToPage(key as Page)}
+                  className={`px-4 py-2 font-mono text-[10px] uppercase tracking-[0.24em] transition-colors cursor-pointer ${
+                    page === key
+                      ? "bg-orange-brand text-white"
+                      : "border border-border-card text-gray-400 hover:border-orange-brand/50 hover:text-white"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+              <a
+                href="https://wa.me/256709449308"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-white text-black font-display text-xs font-bold uppercase tracking-widest hover:bg-orange-brand hover:text-white transition-colors"
               >
                 Work with me
-              </button>
+              </a>
               <ThemeToggle />
             </div>
 
-            {/* Mobile controls */}
-            <div className="flex items-center gap-3 md:hidden">
+            <div className="flex items-center gap-2 md:hidden">
               <ThemeToggle />
-              <button 
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-                className="p-2 text-gray-400 hover:text-white transition-colors focus:outline-none cursor-pointer"
-                aria-label="Toggle Menu"
+              <button
+                onClick={() => setMobileMenuOpen((open) => !open)}
+                className="grid h-9 w-9 place-items-center border border-border-card text-gray-300 cursor-pointer"
+                aria-label="Toggle menu"
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
           </div>
         </nav>
 
-        {/* Mobile Drawer */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }}
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="fixed inset-0 z-40 bg-dark-bg pt-24 px-6 md:hidden flex flex-col gap-6 border-b border-border-card"
+              exit={{ opacity: 0, y: -12 }}
+              className="fixed inset-x-0 top-20 z-40 border-b border-border-card bg-dark-bg p-5 md:hidden"
             >
-              <button onClick={() => handleViewChange("home")} className="text-lg font-display font-bold text-white tracking-wide border-b border-border-card/55 pb-2 text-left cursor-pointer">Home</button>
-              <button onClick={() => handleViewChange("about")} className="text-lg font-display font-bold text-white tracking-wide border-b border-border-card/55 pb-2 text-left cursor-pointer">About</button>
-              <button onClick={() => handleViewChange("sandbox")} className="text-lg font-display font-bold text-white tracking-wide border-b border-border-card/55 pb-2 text-left cursor-pointer">3D Sandbox</button>
-              <button onClick={() => handleViewChange("portfolio")} className="text-lg font-display font-bold text-white tracking-wide border-b border-border-card/55 pb-2 text-left cursor-pointer">Portfolio</button>
-              <button onClick={() => handleViewChange("services")} className="text-lg font-display font-bold text-white tracking-wide border-b border-border-card/55 pb-2 text-left flex items-center justify-between cursor-pointer">
-                Services <Sparkles className="w-4 h-4 text-orange-brand" />
-              </button>
-              <button onClick={() => handleViewChange("contact")} className="w-full mt-4 py-3 bg-orange-brand text-white text-center font-display font-bold uppercase text-xs tracking-widest cursor-pointer">
-                Work with me
-              </button>
+              <div className="grid gap-3">
+                <button onClick={() => goToPage("profile")} className="border border-border-card px-4 py-3 text-left font-display font-bold text-white cursor-pointer">
+                  Profile
+                </button>
+                <button onClick={() => goToPage("services")} className="border border-border-card px-4 py-3 text-left font-display font-bold text-white cursor-pointer">
+                  Services & Contact
+                </button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* ── MAIN VIEW CONTAINER ── */}
-        <main className="w-full flex-grow pt-20">
+        <main className="pt-20">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeView}
-              initial={{ opacity: 0, y: 15 }}
+              key={page}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="w-full"
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
             >
-              {activeView === "home" && (
-                <>
-                  <HeroSection handleViewChange={handleViewChange} />
-                  
-                  {/* ── CLIENT BRANDS SPEEDWAY TICKER ── */}
-                  <section id="brands-ticker" className="py-8 bg-black border-b border-border-card/45 overflow-hidden">
-                    <div className="w-full px-6">
-                      <p className="text-center font-mono text-[10px] tracking-[0.3em] text-gray-650 uppercase mb-4">
-                        STRATEGIC BRAND EXPERIENCES DEVELOPED ACROSS UGANDA
-                      </p>
-                      <div className="flex flex-wrap justify-center gap-2.5">
-                        {ALL_BRANDS.map((brand, idx) => (
-                          <span 
-                            key={idx} 
-                            className="px-3.5 py-1.5 bg-card-bg border border-border-card text-gray-400 text-xs font-mono tracking-wider hover:text-white hover:border-orange-brand transition-colors cursor-default"
-                          >
-                            {brand}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </section>
-
-                  {/* ── FEATURED COMPOSE IMAGES EXHIBIT ── */}
-                  <FeaturedShowcase setActiveProject={setActiveProject} handleViewChange={handleViewChange} />
-
-                  {/* Minimal elegant CTA transition rail */}
-                  <div className="py-16 px-6 flex justify-center bg-dark-bg border-b border-border-card">
-                    <div className="flex flex-col sm:flex-row gap-6 items-center text-center">
-                      <span className="font-mono text-zinc-500 text-[10px] tracking-widest uppercase">Begin exploring work:</span>
-                      <div className="flex flex-wrap justify-center gap-4">
-                        <button 
-                          onClick={() => handleViewChange("portfolio")} 
-                          className="px-5 py-2.5 bg-border-card/40 hover:bg-orange-brand hover:text-white text-gray-300 font-mono text-[10px] tracking-widest uppercase transition-all border border-border-card cursor-pointer"
-                        >
-                          Selected Renders
-                        </button>
-                        <button 
-                          onClick={() => handleViewChange("about")} 
-                          className="px-5 py-2.5 bg-border-card/40 hover:bg-orange-brand hover:text-white text-gray-300 font-mono text-[10px] tracking-widest uppercase transition-all border border-border-card cursor-pointer"
-                        >
-                          About Ezra
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {activeView === "about" && (
-                <AboutSection handleViewChange={handleViewChange} />
-              )}
-
-              {activeView === "sandbox" && (
-                <SandboxSection handleViewChange={handleViewChange} />
-              )}
-
-              {activeView === "portfolio" && (
-                <PortfolioSection handleViewChange={handleViewChange} setActiveProject={setActiveProject} />
-              )}
-
-              {activeView === "services" && (
-                <ServicesSection handleViewChange={handleViewChange} />
-              )}
-
-              {activeView === "contact" && (
-                <ContactSection />
-              )}
+              {page === "profile" ? <ProfilePage goToPage={goToPage} /> : <ServicesPage />}
             </motion.div>
           </AnimatePresence>
         </main>
 
-        {/* ── FOOTER MARKINGS ── */}
-        <footer className="py-12 px-6 border-t border-border-card bg-black w-full">
-          <div className="w-full px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-gray-500 text-xs">
-            
-            <div className="flex items-center gap-6 cursor-pointer" onClick={() => handleViewChange("home")}>
-              <EzraCollectiveLogo className="h-14 w-auto" />
-              <span className="text-[10px] font-mono whitespace-nowrap">© 2026 Gaitano Ezra. Kampala, Uganda.</span>
-            </div>
-
-            <div className="flex gap-6 font-mono text-[10px]">
-              <a href="https://www.instagram.com/geatano_ezra?igsh=MzhuNm9yYWRicHMz&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-orange-brand transition-colors flex items-center gap-1 uppercase">
-                INSTAGRAM <ExternalLink className="w-3 h-3" />
+        <footer className="border-t border-border-card bg-black px-5 py-8">
+          <div className="flex w-full flex-col gap-5 text-xs text-gray-500 md:flex-row md:items-center md:justify-between">
+            <button onClick={() => goToPage("profile")} className="flex items-center gap-4 text-left cursor-pointer">
+              <EzraCollectiveLogo className="h-10 w-auto" />
+              <span className="font-mono">© 2026 Gaitano Ezra. Kampala, Uganda.</span>
+            </button>
+            <div className="flex flex-wrap gap-4 font-mono text-[10px] uppercase tracking-widest">
+              <a href="mailto:geotanoezra01@gmail.com" className="hover:text-orange-brand">Email</a>
+              <a href="tel:+256761768144" className="hover:text-orange-brand">Call</a>
+              <a href="https://www.instagram.com/geatano_ezra?igsh=MzhuNm9yYWRicHMz&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-orange-brand">
+                Instagram
               </a>
-              <a href="mailto:geotanoezra01@gmail.com" className="hover:text-orange-brand transition-colors uppercase">EMAIL</a>
-              <a href="tel:+256761768144" className="hover:text-orange-brand transition-colors uppercase">CALL</a>
             </div>
-
           </div>
         </footer>
-
-        {/* ── PROJECT DETAILS OVERLAY MODAL ── */}
-        <AnimatePresence>
-          {activeProject && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setActiveProject(null)}
-              className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer"
-            >
-              <motion.div 
-                initial={{ scale: 0.95, y: 15 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.95, y: 15 }}
-                onClick={(e) => e.stopPropagation()}
-                className="bg-card-bg border border-border-card max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative cursor-default m-4"
-              >
-                <button 
-                  onClick={() => setActiveProject(null)} 
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white border border-border-card/85 bg-black/40 hover:border-orange-brand/50 transition-colors cursor-pointer"
-                  aria-label="Close modal"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-
-                <div className="aspect-[16/10] w-full bg-zinc-950 border border-border-card overflow-hidden">
-                  <img 
-                    src={activeProject.image} 
-                    alt={activeProject.title} 
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <div className="mt-6 space-y-4 text-left">
-                  <div className="flex flex-wrap justify-between items-start gap-4">
-                    <div>
-                      <span className="px-2 py-0.5 bg-orange-brand/10 border border-orange-brand/35 text-orange-brand text-[9px] font-mono uppercase tracking-wider rounded">
-                        {activeProject.category}
-                      </span>
-                      <h3 className="text-white font-display font-black text-2xl mt-2">{activeProject.title}</h3>
-                    </div>
-                    <div className="flex flex-col text-right font-mono text-[10px] text-gray-500 gap-0.5">
-                      <span>Year: {activeProject.year}</span>
-                      <span>Client: {activeProject.client}</span>
-                      <span>Role: {activeProject.role}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-350 text-sm leading-relaxed font-sans mt-2">
-                    {activeProject.longDescription || activeProject.description}
-                  </p>
-
-                  <div className="pt-4 border-t border-border-card/60">
-                    <h4 className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2.5">Software & Skills Leveraged</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {activeProject.tags.map((tag, i) => (
-                        <span key={i} className="px-2.5 py-1 bg-black text-gray-400 font-mono text-[10px] uppercase border border-border-card/85">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex justify-end pt-4 gap-3">
-                    <button 
-                      onClick={() => setActiveProject(null)}
-                      className="px-4 py-2 border border-border-card text-gray-400 hover:text-white hover:border-orange-brand transition-colors text-xs font-mono uppercase tracking-wider cursor-pointer"
-                    >
-                      Go Back
-                    </button>
-                    <button 
-                      onClick={() => {
-                        setActiveProject(null);
-                        handleViewChange("contact");
-                      }} 
-                      className="px-5 py-2.5 bg-orange-brand hover:bg-orange-brand/90 text-white text-xs font-display font-bold uppercase tracking-widest hover:scale-[1.02] transition-transform cursor-pointer"
-                    >
-                      Discuss similar project
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
       </div>
     </>
+  );
+}
+
+function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
+  return (
+    <div>
+      <section className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b border-border-card bg-black px-5 py-10 sm:py-14 lg:px-10">
+        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(0deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px]" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-orange-brand/15 to-transparent pointer-events-none" />
+
+        <div className="relative grid min-h-[calc(100vh-160px)] w-full gap-10 lg:grid-cols-[1fr_460px] xl:grid-cols-[1fr_520px] lg:items-stretch">
+          <div className="flex flex-col justify-between border border-border-card bg-dark-bg/80 p-5 sm:p-8 lg:p-10">
+            <div>
+              <EzraCollectiveLogo className="mb-10 h-20 w-auto sm:h-28 lg:h-36" />
+              <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
+                About
+              </p>
+              <h1 className="max-w-5xl font-display text-4xl font-black leading-[0.96] text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+                Creative direction meets <span className="text-orange-brand">real results.</span>
+              </h1>
+            </div>
+
+            <div>
+              <div className="mt-10 grid max-w-2xl grid-cols-3 gap-4 border-y border-border-card py-6">
+                {[
+                  ["5+", "Years creating"],
+                  ["10+", "Brands served"],
+                  ["6", "Core services"],
+                ].map(([value, label]) => (
+                  <div key={label}>
+                    <p className="font-display text-4xl font-black text-white lg:text-5xl">
+                      {value.includes("+") ? value.replace("+", "") : value}
+                      {value.includes("+") && <span className="text-orange-brand">+</span>}
+                    </p>
+                    <p className="mt-1 max-w-24 font-mono text-[10px] uppercase tracking-widest text-gray-500">
+                      {label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 grid gap-8 text-base leading-8 text-gray-400 xl:grid-cols-[1fr_0.9fr]">
+                <div className="space-y-5">
+                  <p>
+                    I am <strong className="text-white">Gaitano Ezra</strong>, a digital creator based in Kampala. I work at the intersection of content strategy, visual storytelling, and brand positioning.
+                  </p>
+                  <p>
+                    At <strong className="text-white">Koko Digital Studio</strong>, I lead creative direction, video production, and platform management for hospitality, lifestyle, sports, events, and beverage brands across Uganda.
+                  </p>
+                </div>
+                <p className="border-l border-orange-brand/60 pl-5 text-gray-300">
+                  My work is simple: build a clear brand voice that turns attention into customers and customers into loyal communities.
+                </p>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button onClick={() => goToPage("services")} className="bg-orange-brand px-5 py-3 font-display text-xs font-bold uppercase tracking-widest text-white cursor-pointer">
+                  View services
+                </button>
+                <a href="https://wa.me/256709449308" target="_blank" rel="noopener noreferrer" className="border border-border-card bg-black/40 px-5 py-3 font-display text-xs font-bold uppercase tracking-widest text-gray-300 hover:border-orange-brand hover:text-white">
+                  Start a project
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <aside className="grid gap-5 lg:grid-rows-[1fr_auto]">
+            <div className="relative min-h-[520px] overflow-hidden border border-border-card bg-card-bg">
+              <img
+                src={PROFILE_IMAGE}
+                alt="Gaitano Ezra"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/65 p-5 backdrop-blur">
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-orange-brand">Digital creator</p>
+                <h2 className="mt-2 font-display text-3xl font-black text-white">Gaitano Ezra</h2>
+                <p className="mt-2 text-sm text-gray-400">Kampala, Uganda</p>
+              </div>
+            </div>
+
+            <div className="border border-border-card bg-card-bg p-5">
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-orange-brand">
+                Brands I have worked with
+              </p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                {WORKED_WITH.slice(0, 4).map((brand) => (
+                  <a
+                    key={brand.name}
+                    href={brand.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative min-h-32 overflow-hidden border border-border-card bg-black transition-colors hover:border-orange-brand/70"
+                  >
+                    <img
+                      src={brand.image}
+                      alt={brand.name}
+                      className="absolute inset-0 h-full w-full object-cover opacity-55 transition duration-500 group-hover:scale-105 group-hover:opacity-80"
+                    />
+                    <span className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
+                    <span className="relative flex h-full min-h-32 flex-col justify-end p-4">
+                      <span className="mb-2 inline-flex w-fit items-center gap-1 border border-orange-brand/50 bg-black/55 px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-orange-brand backdrop-blur">
+                        View page <ExternalLink className="h-3 w-3" />
+                      </span>
+                      <span className="block font-display text-xl font-black text-white">{brand.name}</span>
+                      <span className="mt-1 block text-xs text-gray-300">{brand.type}</span>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section className="border-b border-border-card bg-black px-5 py-16 lg:px-10">
+        <div className="w-full">
+          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
+                Places I have worked from
+              </p>
+              <h2 className="font-display text-3xl font-black text-white sm:text-5xl">
+                Work that stands out.
+              </h2>
+            </div>
+            <button onClick={() => goToPage("services")} className="inline-flex items-center gap-2 text-left font-mono text-xs uppercase tracking-widest text-gray-400 hover:text-orange-brand cursor-pointer">
+              See full services <ArrowUpRight className="h-4 w-4" />
+            </button>
+          </div>
+
+          <div className="mb-14 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {WORKED_WITH.map((brand, index) => (
+              <a
+                key={brand.name}
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group relative min-h-80 overflow-hidden border border-border-card bg-card-bg ${
+                  index === 0 ? "xl:col-span-2" : ""
+                }`}
+              >
+                <img
+                  src={brand.image}
+                  alt={brand.name}
+                  className="absolute inset-0 h-full w-full object-cover opacity-65 transition duration-700 group-hover:scale-105 group-hover:opacity-90"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
+                <div className="absolute inset-0 border border-transparent transition-colors group-hover:border-orange-brand/80" />
+                <div className="relative flex h-full min-h-80 flex-col justify-between p-5">
+                  <div className="flex items-center justify-between">
+                    <span className="border border-white/15 bg-black/55 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-gray-200 backdrop-blur">
+                      0{index + 1}
+                    </span>
+                    <span className="grid h-9 w-9 place-items-center bg-orange-brand text-white opacity-90 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </div>
+
+                  <div>
+                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.28em] text-orange-brand">
+                      {brand.type}
+                    </p>
+                    <h3 className="font-display text-2xl font-black leading-tight text-white">
+                      {brand.name}
+                    </h3>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="grid border border-border-card bg-border-card md:grid-cols-2 xl:grid-cols-4">
+            {homePitchBlocks.map((item, index) => (
+              <article key={item.title} className="group bg-card-bg p-6 transition-colors hover:bg-[#151515]">
+                <div className="mb-10 flex items-center justify-between">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-orange-brand">
+                    {item.eyebrow}
+                  </span>
+                  <span className="font-display text-4xl font-black text-white/10 transition-colors group-hover:text-orange-brand">
+                    0{index + 1}
+                  </span>
+                </div>
+                <h3 className="font-display text-2xl font-black leading-tight text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-5 text-sm leading-7 text-gray-400">
+                  {item.copy}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function ServicesPage() {
+  return (
+    <div>
+      <section className="border-b border-border-card px-5 py-16 sm:py-20 lg:px-10">
+        <div className="w-full">
+          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
+            What I do
+          </p>
+          <h1 className="max-w-5xl font-display text-4xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">
+            Digital services for brands that need clear content.
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-gray-400">
+            I keep the process simple: understand the brand, plan the message, create the content, post with consistency, and track what is working.
+          </p>
+
+          <div className="mt-12 grid border border-border-card bg-border-card md:grid-cols-2 xl:grid-cols-6">
+            {SERVICES.map((service) => (
+              <article key={service.id} className="bg-card-bg p-6 text-left">
+                <p className="font-mono text-[11px] font-bold text-orange-brand">{service.number}</p>
+                <h2 className="mt-8 font-display text-2xl font-bold text-white">{service.title}</h2>
+                <p className="mt-4 text-sm leading-7 text-gray-400">{service.description}</p>
+                <p className="mt-6 inline-block border border-orange-brand/50 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.24em] text-orange-brand">
+                  {service.tag}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-black px-5 py-16 lg:px-10">
+        <div className="grid w-full gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
+              Contact
+            </p>
+            <h2 className="font-display text-4xl font-black text-white sm:text-5xl">
+              Let us build the next campaign.
+            </h2>
+            <p className="mt-5 text-sm leading-7 text-gray-400">
+              Based in Kampala, available for social media management, content direction, video editing, copywriting, and Meta ads support.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {contactLinks.map((method) => (
+              <a
+                key={method.label}
+                href={method.href}
+                target={method.href.startsWith("http") ? "_blank" : undefined}
+                rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="group border border-border-card bg-card-bg p-5 hover:border-orange-brand/60"
+              >
+                <div className="mb-8 flex items-center justify-between">
+                  <method.icon className="h-5 w-5 text-orange-brand" />
+                  <ArrowUpRight className="h-4 w-4 text-gray-600 group-hover:text-orange-brand" />
+                </div>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-gray-500">{method.label}</p>
+                <p className="mt-2 font-display text-base font-bold text-white">{method.value}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

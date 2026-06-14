@@ -1,7 +1,7 @@
 export interface Project {
   id: string;
   title: string;
-  category: "3D Design" | "Art Direction" | "Branding" | "Editorial Layout" | "Motion Graphics";
+  category: "Content" | "Video" | "Social Media" | "Campaign";
   image: string;
   description: string;
   longDescription?: string;
