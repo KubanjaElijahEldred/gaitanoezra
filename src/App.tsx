@@ -423,13 +423,13 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
               </div>
               <button
                 onClick={() => setShowAllBrands((v) => !v)}
-                className="group inline-flex items-center gap-2 self-start border border-border-card bg-card-bg px-5 py-3 font-mono text-xs uppercase tracking-widest text-gray-400 transition-all hover:border-orange-brand hover:text-orange-brand hover:bg-orange-brand/5 cursor-pointer"
+                className="group relative inline-flex items-center gap-3 self-start overflow-hidden border border-orange-brand/50 bg-orange-brand/10 px-7 py-4 font-mono text-xs uppercase tracking-[0.2em] text-orange-brand transition-all duration-300 hover:border-orange-brand hover:bg-orange-brand hover:text-white hover:shadow-lg hover:shadow-orange-brand/20 cursor-pointer"
               >
-                {showAllBrands ? "Show less" : "See more brands"}
+                <span className="relative z-10">{showAllBrands ? "Show less" : "See more brands"}</span>
                 {showAllBrands ? (
-                  <ChevronUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+                  <ChevronUp className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5" />
                 ) : (
-                  <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                  <ArrowUpRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 )}
               </button>
             </div>
