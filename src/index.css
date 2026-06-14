@@ -80,6 +80,11 @@
   color: #ffffff !important;
 }
 
+:root.light .hover\:bg-orange-brand\/5:hover,
+:root.light .group-hover\:bg-orange-brand\/5:hover {
+  background-color: rgb(232 92 26 / 0.08) !important;
+}
+
 /* Invert hero logo for visibility in light mode */
 :root.light #hero-sec img[src*="logo"] {
   filter: invert(1);

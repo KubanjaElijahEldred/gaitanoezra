@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowUpRight,
+  ChevronDown,
+  ChevronUp,
   ExternalLink,
   Instagram,
   Mail,
@@ -373,7 +375,7 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
                   <img
                     src={brand.image}
                     alt={brand.name}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    className="h-full w-full object-contain p-6 transition duration-700 group-hover:scale-[1.02]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
                   <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
@@ -404,36 +406,63 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
             ))}
           </div>
 
-          <div className="mt-10 border-t border-border-card pt-8">
-            <button
-              onClick={() => setShowAllBrands((v) => !v)}
-              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-400 hover:text-orange-brand transition-colors cursor-pointer"
-            >
-              {showAllBrands ? "Show less" : "See more brands"}
-              <ArrowUpRight className={`h-4 w-4 transition-transform ${showAllBrands ? "rotate-180" : ""}`} />
-            </button>
+          <div className="relative mt-16 overflow-hidden border-t border-border-card pt-12">
+            <div className="absolute right-0 top-0 h-40 w-40 bg-orange-brand/5 blur-[80px] pointer-events-none" />
 
-            {showAllBrands && (
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 12 }}
-                transition={{ duration: 0.2 }}
-                className="mt-6 flex flex-wrap gap-3"
+            <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
+                  Extended Network
+                </p>
+                <h3 className="font-display text-2xl font-black text-white sm:text-3xl">
+                  More collaborators & clients
+                </h3>
+                <p className="mt-2 max-w-xl text-sm leading-7 text-gray-500">
+                  A wider circle of brands, venues, and teams I have supported across Uganda.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowAllBrands((v) => !v)}
+                className="group inline-flex items-center gap-2 self-start border border-border-card bg-card-bg px-5 py-3 font-mono text-xs uppercase tracking-widest text-gray-400 transition-all hover:border-orange-brand hover:text-orange-brand hover:bg-orange-brand/5 cursor-pointer"
               >
-                {ALL_BRAND_LINKS.map((brand) => (
-                  <a
-                    key={brand.name}
-                    href={brand.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border border-border-card bg-card-bg px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-gray-400 transition-colors hover:border-orange-brand hover:text-orange-brand"
-                  >
-                    {brand.name}
-                  </a>
-                ))}
-              </motion.div>
-            )}
+                {showAllBrands ? "Show less" : "See more brands"}
+                {showAllBrands ? (
+                  <ChevronUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
+                ) : (
+                  <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                )}
+              </button>
+            </div>
+
+            <AnimatePresence>
+              {showAllBrands && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {ALL_BRAND_LINKS.map((brand, idx) => (
+                      <motion.a
+                        key={brand.name}
+                        href={brand.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2, delay: idx * 0.04 }}
+                        className="group flex items-center justify-between border border-border-card bg-card-bg px-5 py-4 font-mono text-[11px] uppercase tracking-widest text-gray-400 transition-all hover:border-orange-brand hover:bg-orange-brand/5 hover:text-orange-brand"
+                      >
+                        <span className="pr-3">{brand.name}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </motion.a>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </section>
