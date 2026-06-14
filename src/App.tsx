@@ -228,7 +228,7 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-orange-brand/15 to-transparent pointer-events-none" />
 
         <div className="relative grid w-full gap-10 lg:grid-cols-[1fr_460px] xl:grid-cols-[1fr_520px] lg:items-stretch">
-          <div className="flex flex-col border border-border-card bg-dark-bg/80 p-5 sm:p-8 lg:p-10">
+          <div className="order-2 flex flex-col border border-border-card bg-dark-bg/80 p-5 sm:p-8 lg:order-1 lg:p-10">
             <div>
               <EzraCollectiveLogo className="mb-6 h-20 w-auto sm:h-28 lg:h-32" />
               <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
@@ -274,8 +274,8 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
 
               <div className="mt-8 overflow-hidden border border-border-card">
                 <img
-                  src="/assets/images/hero-abstract-bg.png"
-                  alt="Abstract 3D background"
+                  src="/assets/images/content-creator-workspace.jpg"
+                  alt="Video editing workspace"
                   className="h-56 w-full object-cover sm:h-72 lg:h-80"
                 />
               </div>
@@ -291,7 +291,7 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
             </div>
           </div>
 
-          <aside className="grid gap-5 lg:grid-rows-[1fr_auto]">
+          <aside className="order-1 grid gap-5 lg:order-2 lg:grid-rows-[1fr_auto]">
             <div className="relative min-h-[520px] overflow-hidden border border-border-card bg-card-bg">
               <img
                 src={PROFILE_IMAGE}
