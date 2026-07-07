@@ -1,5 +1,5 @@
 import { Project, Service, ClientStory, ClientWork, InstagramStats } from "./types";
-import reelLiveImg from "./assets/live.png";
+import reelFeaturedImg from "./assets/red.png";
 
 export const PROFILE_IMAGE = "/assets/images/gaitano_ezra_profile_1781023273890.png";
 
@@ -237,8 +237,8 @@ export const WORKED_WITH = [
 
 /**
  * Default Instagram stats used while the /api/instagram endpoint is loading
- * or when it returns an error. The reel numbers below match the live insights
- * screenshot (src/assets/live.png). Update them or switch to the RapidAPI
+ * or when it returns an error. The reel numbers below match the featured
+ * screenshot (src/assets/red.png). Update them or switch to the RapidAPI
  * provider to keep them in sync automatically.
  */
 export const DEFAULT_INSTAGRAM_STATS: InstagramStats = {
@@ -251,11 +251,11 @@ export const DEFAULT_INSTAGRAM_STATS: InstagramStats = {
   reel: {
     shortcode: "DaNpsp2KCYF",
     url: "https://www.instagram.com/reel/DaNpsp2KCYF/?igsh=ZWlndTg3dmN3MGpj",
-    views: 1156010,
-    likes: 13000,
-    comments: 11,
+    views: 4700000,
+    likes: 59700,
+    comments: 29,
     caption: "",
-    thumbnail: reelLiveImg,
+    thumbnail: reelFeaturedImg,
   },
   updatedAt: new Date().toISOString(),
 };
