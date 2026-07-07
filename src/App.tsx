@@ -587,18 +587,11 @@ function InstagramStatsSection() {
             rel="noopener noreferrer"
             className="group relative block overflow-hidden border border-border-card bg-black"
           >
-            {stats.reel.thumbnail ? (
-              <img
-                src={stats.reel.thumbnail}
-                alt="Instagram reel thumbnail"
-                className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
-              />
-            ) : (
-              <div className="flex h-80 w-full flex-col items-center justify-center gap-4 bg-card-bg text-gray-500">
-                <Instagram className="h-12 w-12" />
-                <span className="font-mono text-xs uppercase tracking-widest">Open reel on Instagram</span>
-              </div>
-            )}
+            <img
+              src={stats.reel.thumbnail || DEFAULT_INSTAGRAM_STATS.reel.thumbnail}
+              alt="Instagram reel thumbnail"
+              className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-5">
               <span className="inline-flex items-center gap-2 bg-orange-brand px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-white">

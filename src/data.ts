@@ -1,4 +1,5 @@
 import { Project, Service, ClientStory, ClientWork, InstagramStats } from "./types";
+import reelLiveImg from "./assets/live.png";
 
 export const PROFILE_IMAGE = "/assets/images/gaitano_ezra_profile_1781023273890.png";
 
@@ -236,9 +237,9 @@ export const WORKED_WITH = [
 
 /**
  * Default Instagram stats used while the /api/instagram endpoint is loading
- * or when it returns an error. These are intentionally zeros so the UI can
- * prompt the visitor to refresh or so the owner can set real values via
- * environment variables / a third-party API provider.
+ * or when it returns an error. The reel numbers below match the live insights
+ * screenshot (src/assets/live.png). Update them or switch to the RapidAPI
+ * provider to keep them in sync automatically.
  */
 export const DEFAULT_INSTAGRAM_STATS: InstagramStats = {
   success: true,
@@ -250,11 +251,11 @@ export const DEFAULT_INSTAGRAM_STATS: InstagramStats = {
   reel: {
     shortcode: "DaNpsp2KCYF",
     url: "https://www.instagram.com/reel/DaNpsp2KCYF/?igsh=ZWlndTg3dmN3MGpj",
-    views: 0,
-    likes: 0,
-    comments: 0,
+    views: 1156010,
+    likes: 13000,
+    comments: 11,
     caption: "",
-    thumbnail: "/assets/images/reel-featured.png",
+    thumbnail: reelLiveImg,
   },
   updatedAt: new Date().toISOString(),
 };
