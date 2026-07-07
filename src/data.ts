@@ -1,4 +1,4 @@
-import { Project, Service, ClientStory } from "./types";
+import { Project, Service, ClientStory, ClientWork, InstagramStats } from "./types";
 
 export const PROFILE_IMAGE = "/assets/images/gaitano_ezra_profile_1781023273890.png";
 
@@ -67,6 +67,45 @@ export const PROJECTS: Project[] = [
       defaultColor: "#888880"
     }
   }
+];
+
+/**
+ * Text-first client list shown in the "Work that stands out" section.
+ * Matches the screenshot design sent by the client.
+ */
+export const CLIENT_WORKS: ClientWork[] = [
+  {
+    id: "vulkan-arena",
+    company: "Vulkan Sports Arena",
+    category: "Sports & entertainment",
+    description:
+      "For Vulkan, it's all about energy and movement — making people feel like they need to be there. Think event coverage, short-form video, match-day hype, and social management that keeps the venue feeling alive.",
+    url: "https://www.instagram.com/vulkan_sportsarena?igsh=cDlydzZ4aWk5MXFr&utm_source=qr",
+  },
+  {
+    id: "garuga-resort",
+    company: "Garuga Resort Beach Hotel",
+    category: "Resort & hospitality",
+    description:
+      "For Garuga Resort, the goal is selling the escape. Beach shots, rooms, food, guest moments — all the good stuff that makes people want to book a weekend away.",
+    url: "https://www.instagram.com/garuga_resort_beach_hotel?igsh=cWxudHdld21zcW90",
+  },
+  {
+    id: "drinks24",
+    company: "Drinks24 UG",
+    category: "Beverage delivery",
+    description:
+      "For Drinks24, it's about making drinks impossible to scroll past. Fast-moving offers, scroll-stopping captions, and content built to push people straight to WhatsApp orders.",
+    url: "https://www.instagram.com/drinks_24_ug?igsh=MWx0bjdwb3pjYm40ZQ%3D%3D&utm_source=qr",
+  },
+  {
+    id: "bespoke-cakes",
+    company: "Bespoke Cakes UG",
+    category: "Bakery & custom cakes",
+    description:
+      "For Bespoke Cakes, the content makes every cake feel personal and premium — including one video that hit 3.8 million views. From celebration storytelling to sweet captions to clear order messaging, the work turns cake into an experience worth ordering.",
+    url: "https://www.instagram.com/bespokecakesug?TY0aXphN3JsMHAwcg%3D%3D&utm_source=qr",
+  },
 ];
 
 export const SERVICES: Service[] = [
@@ -194,3 +233,28 @@ export const WORKED_WITH = [
     meaning: "For Venstela, the work is about turning events into proof of quality. The content direction supports event recaps, behind-the-scenes moments, service promotion, and social storytelling that helps clients trust the team."
   }
 ];
+
+/**
+ * Default Instagram stats used while the /api/instagram endpoint is loading
+ * or when it returns an error. These are intentionally zeros so the UI can
+ * prompt the visitor to refresh or so the owner can set real values via
+ * environment variables / a third-party API provider.
+ */
+export const DEFAULT_INSTAGRAM_STATS: InstagramStats = {
+  success: true,
+  source: "manual",
+  username: "geatano_ezra",
+  followers: 0,
+  following: 0,
+  posts: 0,
+  reel: {
+    shortcode: "DaNpsp2KCYF",
+    url: "https://www.instagram.com/reel/DaNpsp2KCYF/?igsh=ZWlndTg3dmN3MGpj",
+    views: 0,
+    likes: 0,
+    comments: 0,
+    caption: "",
+    thumbnail: "/assets/images/reel-featured.png",
+  },
+  updatedAt: new Date().toISOString(),
+};

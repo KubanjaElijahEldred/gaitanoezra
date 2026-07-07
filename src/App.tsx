@@ -5,16 +5,21 @@ import {
   ChevronDown,
   ChevronUp,
   ExternalLink,
+  Heart,
   Instagram,
   Mail,
   Menu,
   MessageCircle,
   Moon,
   Phone,
+  Play,
+  RefreshCw,
   Sun,
+  Users,
   X,
 } from "lucide-react";
-import { ALL_BRAND_LINKS, PROFILE_IMAGE, SERVICES, WORKED_WITH } from "./data";
+import { ALL_BRAND_LINKS, CLIENT_WORKS, DEFAULT_INSTAGRAM_STATS, PROFILE_IMAGE, SERVICES, WORKED_WITH } from "./data";
+import { InstagramStats } from "./types";
 import { useTheme } from "./components/ThemeProvider";
 import SplashScreen from "./components/SplashScreen";
 import logoImg from "./assets/images/logo.png";
@@ -345,8 +350,8 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
       </section>
 
       <section className="border-b border-border-card bg-black px-5 py-16 lg:px-10">
-        <div className="w-full">
-          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="w-full max-w-4xl">
+          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
                 Places I have worked from
@@ -360,53 +365,36 @@ function ProfilePage({ goToPage }: { goToPage: (page: Page) => void }) {
             </button>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {WORKED_WITH.map((brand, index) => (
-              <a
-                key={brand.name}
-                href={brand.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group overflow-hidden border border-border-card bg-card-bg ${
-                  index === 0 ? "xl:col-span-2" : ""
-                }`}
-              >
-                <div className={`relative overflow-hidden bg-zinc-950 ${index === 0 ? "h-[520px]" : "h-80"}`}>
-                  <img
-                    src={brand.image}
-                    alt={brand.name}
-                    className="h-full w-full object-contain p-6 transition duration-700 group-hover:scale-[1.02]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                  <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
-                    <span className="border border-white/15 bg-black/55 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-gray-200 backdrop-blur">
-                      0{index + 1}
-                    </span>
-                    <span className="grid h-9 w-9 place-items-center bg-orange-brand text-white opacity-90 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
-                      <ArrowUpRight className="h-4 w-4" />
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.28em] text-orange-brand">
-                    {brand.type}
-                  </p>
-                  <h3 className="font-display text-2xl font-black leading-tight text-white">
-                    {brand.name}
+          <div className="divide-y divide-white/10">
+            {CLIENT_WORKS.map((work) => (
+              <article key={work.id} className="py-12 first:pt-0">
+                <a
+                  href={work.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <h3 className="font-serif text-3xl font-bold text-white transition-colors group-hover:text-orange-brand sm:text-4xl">
+                    {work.company}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-gray-300">
-                    {brand.meaning}
+                  <p className="mt-2 font-serif text-xl italic text-gray-300">
+                    {work.category}
                   </p>
-                  <span className="mt-5 inline-flex items-center gap-2 border border-orange-brand/50 bg-black/55 px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-orange-brand backdrop-blur transition-colors group-hover:bg-orange-brand group-hover:text-white">
-                    Open Instagram <ExternalLink className="h-3 w-3" />
-                  </span>
-                </div>
-              </a>
+                  <p className="mt-5 font-serif text-lg leading-8 text-gray-400">
+                    {work.description}
+                  </p>
+                </a>
+              </article>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="relative mt-16 overflow-hidden border-t border-border-card pt-12">
+      <InstagramStatsSection />
+
+      <section className="border-b border-border-card bg-black px-5 py-16 lg:px-10">
+        <div className="w-full">
+          <div className="relative overflow-hidden">
             <div className="absolute right-0 top-0 h-40 w-40 bg-orange-brand/5 blur-[80px] pointer-events-none" />
 
             <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
@@ -536,4 +524,119 @@ function ServicesPage() {
       </section>
     </div>
   );
+}
+
+function InstagramStatsSection() {
+  const [stats, setStats] = useState<InstagramStats>(DEFAULT_INSTAGRAM_STATS);
+  const [loading, setLoading] = useState(true);
+
+  const fetchStats = async (silent = false) => {
+    try {
+      if (!silent) setLoading(true);
+      const response = await fetch("/api/instagram");
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data: InstagramStats = await response.json();
+      if (data.success) {
+        setStats(data);
+      } else {
+        throw new Error(data.error || "Failed to load Instagram stats");
+      }
+    } catch (err) {
+      // Silently keep the last known values so the UI never shows an error message.
+      if (!silent) console.error("Instagram stats refresh failed:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchStats(true);
+    const interval = setInterval(() => fetchStats(true), 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="border-b border-border-card bg-dark-bg px-5 py-16 lg:px-10">
+      <div className="w-full">
+        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.34em] text-orange-brand">
+              Live from Instagram
+            </p>
+            <h2 className="font-display text-3xl font-black text-white sm:text-5xl">
+              Reel performance.
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-7 text-gray-500">
+              Real-time stats for the featured reel. Numbers refresh automatically every 30 seconds.
+            </p>
+          </div>
+          <button
+            onClick={() => fetchStats(false)}
+            disabled={loading}
+            className="inline-flex items-center gap-2 self-start border border-border-card bg-card-bg px-5 py-3 font-mono text-xs uppercase tracking-widest text-gray-300 transition-colors hover:border-orange-brand hover:text-white disabled:opacity-50 cursor-pointer"
+          >
+            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+            Refresh
+          </button>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.5fr]">
+          <a
+            href={stats.reel.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative block overflow-hidden border border-border-card bg-black"
+          >
+            {stats.reel.thumbnail ? (
+              <img
+                src={stats.reel.thumbnail}
+                alt="Instagram reel thumbnail"
+                className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div className="flex h-80 w-full flex-col items-center justify-center gap-4 bg-card-bg text-gray-500">
+                <Instagram className="h-12 w-12" />
+                <span className="font-mono text-xs uppercase tracking-widest">Open reel on Instagram</span>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-5">
+              <span className="inline-flex items-center gap-2 bg-orange-brand px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-white">
+                Watch reel <ExternalLink className="h-3 w-3" />
+              </span>
+            </div>
+          </a>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <StatCard label="Followers" value={stats.followers} icon={Users} />
+            <StatCard label="Reel views" value={stats.reel.views} icon={Play} />
+            <StatCard label="Reel likes" value={stats.reel.likes} icon={Heart} />
+            <StatCard label="Reel comments" value={stats.reel.comments} icon={MessageCircle} />
+          </div>
+        </div>
+
+        <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-gray-600">
+          Last updated: {new Date(stats.updatedAt).toLocaleTimeString()}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function StatCard({ label, value, icon: Icon }: { label: string; value: number; icon: React.ElementType }) {
+  return (
+    <div className="border border-border-card bg-card-bg p-5">
+      <Icon className="h-5 w-5 text-orange-brand" />
+      <p className="mt-6 font-display text-4xl font-black text-white">{formatNumber(value)}</p>
+      <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+function formatNumber(value: number): string {
+  if (value === 0) return "0";
+  if (value >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(1)}B`;
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
+  if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
+  return value.toString();
 }

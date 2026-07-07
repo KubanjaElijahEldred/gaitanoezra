@@ -31,3 +31,37 @@ export interface ClientStory {
   author: string;
   role: string;
 }
+
+/**
+ * Text-first client entry used in the "Work that stands out" section.
+ * Matches the screenshot design: bold company name, italic category,
+ * followed by a short paragraph.
+ */
+export interface ClientWork {
+  id: string;
+  company: string;
+  category: string;
+  description: string;
+  url?: string;
+}
+
+/** Normalized Instagram stats returned by /api/instagram. */
+export interface InstagramStats {
+  success: boolean;
+  source: string;
+  username: string;
+  followers: number;
+  following: number;
+  posts: number;
+  reel: {
+    shortcode: string;
+    url: string;
+    views: number;
+    likes: number;
+    comments: number;
+    caption: string;
+    thumbnail: string;
+  };
+  updatedAt: string;
+  error?: string;
+}
