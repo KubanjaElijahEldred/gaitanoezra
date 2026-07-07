@@ -24,10 +24,11 @@
  * - REEL_THUMBNAIL           manual reel thumbnail URL
  */
 
-const REEL_SHORTCODE = "DaNpsp2KCYF";
-const REEL_URL =
-  "https://www.instagram.com/reel/DaNpsp2KCYF/?igsh=ZWlndTg3dmN3MGpj";
-const DEFAULT_USERNAME = "geatano_ezra";
+import { INSTAGRAM_CONFIG } from "../instagram-config.js";
+
+const REEL_SHORTCODE = INSTAGRAM_CONFIG.reelShortcode;
+const REEL_URL = INSTAGRAM_CONFIG.reelUrl;
+const DEFAULT_USERNAME = INSTAGRAM_CONFIG.username;
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -66,16 +67,18 @@ async function fetchStats(provider, username, shortcode, reelUrl) {
   }
 
   // Default manual / fallback provider.
+  // Use env vars when they are explicitly set; otherwise fall back to the
+  // shared defaults so the deployed UI never shows all zeros.
   return {
-    followers: parseMetric(process.env.INSTAGRAM_FOLLOWERS),
-    following: parseMetric(process.env.INSTAGRAM_FOLLOWING),
-    posts: parseMetric(process.env.INSTAGRAM_POSTS),
+    followers: envMetric("INSTAGRAM_FOLLOWERS", INSTAGRAM_CONFIG.defaults.followers),
+    following: envMetric("INSTAGRAM_FOLLOWING", INSTAGRAM_CONFIG.defaults.following),
+    posts: envMetric("INSTAGRAM_POSTS", INSTAGRAM_CONFIG.defaults.posts),
     reel: {
       shortcode,
       url: reelUrl,
-      views: parseMetric(process.env.REEL_VIEWS),
-      likes: parseMetric(process.env.REEL_LIKES),
-      comments: parseMetric(process.env.REEL_COMMENTS),
+      views: envMetric("REEL_VIEWS", INSTAGRAM_CONFIG.defaults.reel.views),
+      likes: envMetric("REEL_LIKES", INSTAGRAM_CONFIG.defaults.reel.likes),
+      comments: envMetric("REEL_COMMENTS", INSTAGRAM_CONFIG.defaults.reel.comments),
       caption: process.env.REEL_CAPTION || "",
       thumbnail: process.env.REEL_THUMBNAIL || "",
     },
@@ -168,6 +171,12 @@ async function fetchRapidAPIStats(username, shortcode, reelUrl) {
       ]),
     },
   };
+}
+
+function envMetric(key, fallback) {
+  const value = process.env[key];
+  if (value === undefined || value === null || value.trim() === "") return fallback;
+  return parseMetric(value);
 }
 
 function parseMetric(value) {

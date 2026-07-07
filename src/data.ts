@@ -1,3 +1,4 @@
+import { INSTAGRAM_CONFIG } from "../instagram-config.js";
 import { Project, Service, ClientStory, ClientWork, InstagramStats } from "./types";
 import reelFeaturedImg from "./assets/red.png";
 
@@ -237,23 +238,23 @@ export const WORKED_WITH = [
 
 /**
  * Default Instagram stats used while the /api/instagram endpoint is loading
- * or when it returns an error. The reel numbers below match the featured
- * screenshot (src/assets/red.png). Update them or switch to the RapidAPI
- * provider to keep them in sync automatically.
+ * or when it returns an error. Numbers come from the shared config so the
+ * frontend and API stay in sync. Update instagram-config.js or switch to the
+ * RapidAPI provider to keep them current automatically.
  */
 export const DEFAULT_INSTAGRAM_STATS: InstagramStats = {
   success: true,
   source: "manual",
-  username: "geatano_ezra",
-  followers: 0,
-  following: 0,
-  posts: 0,
+  username: INSTAGRAM_CONFIG.username,
+  followers: INSTAGRAM_CONFIG.defaults.followers,
+  following: INSTAGRAM_CONFIG.defaults.following,
+  posts: INSTAGRAM_CONFIG.defaults.posts,
   reel: {
-    shortcode: "DaNpsp2KCYF",
-    url: "https://www.instagram.com/reel/DaNpsp2KCYF/?igsh=ZWlndTg3dmN3MGpj",
-    views: 4700000,
-    likes: 59700,
-    comments: 29,
+    shortcode: INSTAGRAM_CONFIG.reelShortcode,
+    url: INSTAGRAM_CONFIG.reelUrl,
+    views: INSTAGRAM_CONFIG.defaults.reel.views,
+    likes: INSTAGRAM_CONFIG.defaults.reel.likes,
+    comments: INSTAGRAM_CONFIG.defaults.reel.comments,
     caption: "",
     thumbnail: reelFeaturedImg,
   },
