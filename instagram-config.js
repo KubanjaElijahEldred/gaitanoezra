@@ -12,7 +12,7 @@ export const INSTAGRAM_CONFIG = {
   reelUrl:
     "https://www.instagram.com/reel/DaNpsp2KCYF/?igsh=ZWlndTg3dmN3MGpj",
   defaults: {
-    followers: 0,
+    followers: 728,
     following: 0,
     posts: 0,
     reel: {
