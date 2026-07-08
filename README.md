@@ -51,7 +51,7 @@ For automatic real-time updates, subscribe to an Instagram scraper API on RapidA
 
 ### Deploy on Vercel
 
-This project is configured for Vercel. Serverless functions live in the `api/` directory.
+This project is configured for Vercel. Serverless functions live in the `api/` directory
 
 ```bash
 vercel
