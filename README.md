@@ -6,7 +6,7 @@ A React + Vite portfolio for Gaitano Ezra, a Kampala-based digital creator.
 
 ## Run Locally
 
-**Prerequisites:** Node.js
+**Prerequisites:** Node.js,
 
 1. Install dependencies:
    ```bash
